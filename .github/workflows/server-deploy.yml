@@ -5,7 +5,7 @@ on:
 jobs:
   build:
     name: deploy to prod
-    runs-on: cc-gamge01
+    runs-on: cc-game01
     steps:
     - uses: actions/checkout@v2
 
