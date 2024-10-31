@@ -31,6 +31,11 @@ jobs:
     - name: Deploy new configs
       run: cp -R config/* ${{ secrets.KSCLOUD_SERVERPATH }}/config
 
+    - name: Wait for mods and configs to finish copying
+      uses: juliangruber/sleep-action@v2.0.0
+      with:
+        time: 10s
+
     - name: Start Server
       run: | 
         curl "https://game-admin.kscloud.co.uk/api/client/servers/c0c7c961/power" \
