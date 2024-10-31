@@ -11,7 +11,7 @@ jobs:
 
     - name: Stop Server
       run: | 
-        curl "https://pterodactyl.file.properties/api/client/servers/1a7ce997/power" \
+        curl "https://game.admin.kscloud.co.uk/api/client/servers/c0c7c961/power" \
         -H 'Accept: application/json' \
         -H 'Content-Type: application/json' \
         -H 'Authorization: Bearer ${{ secrets.KSCLOUD_API }}' \
