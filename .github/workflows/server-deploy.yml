@@ -18,7 +18,12 @@ jobs:
         -X POST \
         -d '{
         "signal": "stop"
-        }' 
+        }'
+
+    - name: Wait for server to stop
+      uses: juliangruber/sleep-action@v2.0.0
+      with:
+        time: 40s
 
     - name: Start Server
       run: | 
