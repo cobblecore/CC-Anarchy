@@ -1,0 +1,50 @@
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: deploy to prod
+    runs-on: cc-game01
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Stop Server
+      run: | 
+        curl "https://game-admin.kscloud.co.uk/api/client/servers/c0c7c961/power" \
+        -H 'Accept: application/json' \
+        -H 'Content-Type: application/json' \
+        -H 'Authorization: Bearer ${{ secrets.KSCLOUD_API }}' \
+        -X POST \
+        -d '{
+        "signal": "stop"
+        }'
+
+    - name: Wait for server to stop
+      uses: juliangruber/sleep-action@v2.0.0
+      with:
+        time: 40s
+
+    - name: Deploy new mods
+      run: cp -R mods/* ${{ secrets.KSCLOUD_SERVERPATH }}/mods
+
+    - name: Deploy new configs
+      run: cp -R configs/* ${{ secrets.KSCLOUD_SERVERPATH }}/configs
+
+    - name: Start Server
+      run: | 
+        curl "https://game-admin.kscloud.co.uk/api/client/servers/c0c7c961/power" \
+        -H 'Accept: application/json' \
+        -H 'Content-Type: application/json' \
+        -H 'Authorization: Bearer ${{ secrets.KSCLOUD_API }}' \
+        -X POST \
+        -d '{
+        "signal": "start"
+        }' 
+
+
+    
+#    - name: clean prod files
+#      run: rm -rf /var/www/cc-staffland/public_html/*
+#    - name: copy files to prod folder
+#      run: cp -R * /var/www/cc-staffland/public_html/
