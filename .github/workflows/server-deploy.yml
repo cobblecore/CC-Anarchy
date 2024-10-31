@@ -25,6 +25,12 @@ jobs:
       with:
         time: 40s
 
+    - name: Deploy new mods
+      run: cp -R * ${{ secrets.KSCLOUD_SERVERPATH }}/mods
+
+    - name: Deploy new configs
+      run: cp -R * ${{ secrets.KSCLOUD_SERVERPATH }}/configs
+
     - name: Start Server
       run: | 
         curl "https://game-admin.kscloud.co.uk/api/client/servers/c0c7c961/power" \
