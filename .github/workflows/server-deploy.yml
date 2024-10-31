@@ -14,7 +14,7 @@ jobs:
         curl "https://pterodactyl.file.properties/api/client/servers/1a7ce997/power" \
         -H 'Accept: application/json' \
         -H 'Content-Type: application/json' \
-        -H 'Authorization: Bearer ${{ sercerts.KSCLOUD_API }}' \
+        -H 'Authorization: Bearer ${{ secrets.KSCLOUD_API }}' \
         -X POST \
         -d '{
         "signal": "start"
