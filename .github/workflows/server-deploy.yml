@@ -26,10 +26,10 @@ jobs:
         time: 40s
 
     - name: Deploy new mods
-      run: cp -R * ${{ secrets.KSCLOUD_SERVERPATH }}/mods
+      run: cp -R mods/* ${{ secrets.KSCLOUD_SERVERPATH }}/mods
 
     - name: Deploy new configs
-      run: cp -R * ${{ secrets.KSCLOUD_SERVERPATH }}/configs
+      run: cp -R configs/* ${{ secrets.KSCLOUD_SERVERPATH }}/configs
 
     - name: Start Server
       run: | 
